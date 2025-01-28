@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import utilities.InputNumberValidator;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -42,6 +43,10 @@ public class MainFoodMenu {
         }
 
         this.mainFoods = mainFoods;
+    }
+
+    public void validateInputNumber(int inputNum) {
+        InputNumberValidator.validateInputNumber(inputNum, mainFoods.size());
     }
 
 }
