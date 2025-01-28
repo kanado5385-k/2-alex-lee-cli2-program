@@ -1,4 +1,4 @@
-package domain;
+package domain.food;
 
 public class Food {
     private String name;

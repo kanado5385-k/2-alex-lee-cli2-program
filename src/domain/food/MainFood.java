@@ -1,4 +1,4 @@
-package domain;
+package domain.food;
 
 public class MainFood extends Food {
     public int gram;

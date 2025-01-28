@@ -1,4 +1,4 @@
-package domain;
+package domain.food;
 
 public class Drink extends SideFood {
     public Drink(String name, int price) {
