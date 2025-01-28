@@ -1,4 +1,4 @@
-package org.example.domain.food;
+package domain.food;
 
 public class MainFood extends Food {
     protected int gram;
