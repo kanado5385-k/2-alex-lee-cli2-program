@@ -11,7 +11,11 @@ public class Food {
         this.price = price;
     }
 
-    public int getPrice() {
-        return price;
+    public boolean isSameNumber(int number) {
+        return this.number == number;
+    }
+
+    public int getTotalPrice(int inputQuantity) {
+        return price * inputQuantity;
     }
 }
