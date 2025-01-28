@@ -1,7 +1,10 @@
 package domain.food;
 
 public class Drink extends SideFood {
-    public Drink(String name, int price) {
+    protected int ml;
+
+    public Drink(String name, int price, int ml) {
         super(name, price);
+        this.ml = ml;
     }
 }

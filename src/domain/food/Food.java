@@ -1,8 +1,8 @@
 package domain.food;
 
 public class Food {
-    private String name;
-    private int price;
+    protected String name;
+    protected int price;
 
     public Food(String name, int price) {
         this.name = name;
