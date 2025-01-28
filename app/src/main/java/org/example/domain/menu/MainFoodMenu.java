@@ -1,8 +1,11 @@
-package domain.menu;
+package org.example.domain.menu;
 
-import domain.food.MainFood;
+
+
+import org.example.domain.food.MainFood;
 
 import java.util.List;
+
 
 public class MainFoodMenu {
     private final List<MainFood> mainFoods;

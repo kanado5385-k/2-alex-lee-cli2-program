@@ -1,4 +1,4 @@
-package domain.food;
+package org.example.domain.food;
 
 public class Drink extends SideFood {
     protected int ml;

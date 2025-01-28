@@ -1,7 +1,6 @@
-package domain.menu;
+package org.example.domain.menu;
 
-import domain.food.Drink;
-import domain.food.SideFood;
+import org.example.domain.food.Drink;
 
 import java.util.List;
 
