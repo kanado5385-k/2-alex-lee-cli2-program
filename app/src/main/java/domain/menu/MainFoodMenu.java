@@ -34,11 +34,12 @@ public class MainFoodMenu {
         // JSON 배열을 순회하면서 MainFood 객체 생성
         for (Object obj : jsonArray) {
             JSONObject jsonObject = (JSONObject) obj;
+            int number = ((Long) jsonObject.get("number")).intValue();
             String name = (String) jsonObject.get("name");
             int price = ((Long) jsonObject.get("price")).intValue();
             int gram = ((Long) jsonObject.get("gram")).intValue();
 
-            MainFood mainFood = new MainFood(name, price, gram);
+            MainFood mainFood = new MainFood(number, name, price, gram);
             mainFoods.add(mainFood);
         }
 

@@ -1,10 +1,12 @@
 [
   {
+    "number": 1,
     "name": "삼겹살",
     "price": 10000,
     "gram": 150
   },
   {
+    "number": 2,
     "name": "목살",
     "price": 12000,
     "gram": 180

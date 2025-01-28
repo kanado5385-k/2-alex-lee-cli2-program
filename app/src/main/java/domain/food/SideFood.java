@@ -1,7 +1,8 @@
 package domain.food;
 
 public class SideFood extends Food {
-    public SideFood(String name, int price) {
-        super(name, price);
+    public SideFood(int number, String name, int price) {
+
+        super(number,name, price);
     }
 }
