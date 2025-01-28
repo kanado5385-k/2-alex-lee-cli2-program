@@ -43,7 +43,6 @@ public class MainFoodMenu implements MenuInterface {
             int price = ((Long) jsonObject.get("price")).intValue();
             int gram = ((Long) jsonObject.get("gram")).intValue();
 
-            System.out.println(gram);
             MainFood mainFood = new MainFood(number, name, price, gram);
             mainFoods.add(mainFood);
         }
