@@ -2,27 +2,31 @@ package domain.menu;
 
 
 
+import domain.food.Food;
 import domain.food.MainFood;
+import domain.menu.interfaces.MenuInterface;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import utilities.InputNumberValidator;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-public class MainFoodMenu {
-    public final List<MainFood> mainFoods;
+public class MainFoodMenu implements MenuInterface {
+    private final List<Food> mainFoods;
 
     public MainFoodMenu() throws IOException, ParseException {
-        List<MainFood> mainFoods = new ArrayList<>();
+        this.mainFoods = readMenuFile();
+    }
+
+    @Override
+    public List<Food> readMenuFile () throws IOException, ParseException {
+        List<Food> mainFoods = new ArrayList<>();
         JSONParser parser = new JSONParser();
 
         // JSON 파일을 읽기
@@ -39,15 +43,26 @@ public class MainFoodMenu {
             int price = ((Long) jsonObject.get("price")).intValue();
             int gram = ((Long) jsonObject.get("gram")).intValue();
 
+            System.out.println(gram);
             MainFood mainFood = new MainFood(number, name, price, gram);
             mainFoods.add(mainFood);
         }
-
-        this.mainFoods = mainFoods;
+        return  mainFoods;
     }
 
+    @Override
     public void validateInputNumber(int inputNum) {
         InputNumberValidator.validateInputNumber(inputNum, mainFoods.size());
     }
 
+    @Override
+    public int getTotalPrice(int inputNumber, int inputQuantity) {
+        Food mainFood = null;
+        for (Food food : mainFoods) {
+            if (food.isSameNumber(inputNumber)) {
+                mainFood = food;
+            }
+        }
+        return  mainFood.getTotalPrice(inputQuantity);
+    }
 }
