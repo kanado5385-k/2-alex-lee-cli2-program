@@ -17,15 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrinkMenu implements MenuInterface {
-    private final List<Food> drinks;
+    private final List<Drink> drinks;
 
     public DrinkMenu() throws IOException, ParseException {
         this.drinks = readMenuFile();
     }
 
-    @Override
-    public List<Food> readMenuFile () throws IOException, ParseException {
-        List<Food> drinks = new ArrayList<>();
+    public List<Drink> readMenuFile () throws IOException, ParseException {
+        List<Drink> drinks = new ArrayList<>();
         JSONParser parser = new JSONParser();
 
         // JSON 파일을 읽기
@@ -62,5 +61,9 @@ public class DrinkMenu implements MenuInterface {
             }
         }
         return  mainFood.getTotalPrice(inputQuantity);
+    }
+
+    public List<Drink> getDrinks() {
+        return drinks;
     }
 }

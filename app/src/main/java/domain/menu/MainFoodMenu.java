@@ -18,15 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainFoodMenu implements MenuInterface {
-    private final List<Food> mainFoods;
+    private final List<MainFood> mainFoods;
 
     public MainFoodMenu() throws IOException, ParseException {
         this.mainFoods = readMenuFile();
     }
 
-    @Override
-    public List<Food> readMenuFile () throws IOException, ParseException {
-        List<Food> mainFoods = new ArrayList<>();
+    public List<MainFood> readMenuFile () throws IOException, ParseException {
+        List<MainFood> mainFoods = new ArrayList<>();
         JSONParser parser = new JSONParser();
 
         // JSON 파일을 읽기
@@ -44,6 +43,7 @@ public class MainFoodMenu implements MenuInterface {
             int gram = ((Long) jsonObject.get("gram")).intValue();
 
             MainFood mainFood = new MainFood(number, name, price, gram);
+            //System.out.println(mainFood.getName());
             mainFoods.add(mainFood);
         }
         return  mainFoods;
@@ -63,5 +63,9 @@ public class MainFoodMenu implements MenuInterface {
             }
         }
         return  mainFood.getTotalPrice(inputQuantity);
+    }
+
+    public List<MainFood> getMainFoods() {
+        return mainFoods;
     }
 }

@@ -19,15 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SideFoodMenu implements MenuInterface {
-    private final List<Food> sideFoods;
+    private final List<SideFood> sideFoods;
 
     public SideFoodMenu() throws IOException, ParseException {
         this.sideFoods = readMenuFile();
     }
 
-    @Override
-    public List<Food> readMenuFile () throws IOException, ParseException {
-        List<Food> sideFoods = new ArrayList<>();
+    public List<SideFood> readMenuFile () throws IOException, ParseException {
+        List<SideFood> sideFoods = new ArrayList<>();
         JSONParser parser = new JSONParser();
 
         // JSON 파일을 읽기
@@ -63,5 +62,9 @@ public class SideFoodMenu implements MenuInterface {
             }
         }
         return  mainFood.getTotalPrice(inputQuantity);
+    }
+
+    public List<SideFood> getSideFoods() {
+        return sideFoods;
     }
 }
