@@ -7,4 +7,8 @@ public class MainFood extends Food {
         super(number, name, price);
         this.gram = gram;
     }
+
+    public int getGram() {
+        return gram;
+    }
 }

@@ -18,4 +18,16 @@ public class Food {
     public int getTotalPrice(int inputQuantity) {
         return price * inputQuantity;
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }

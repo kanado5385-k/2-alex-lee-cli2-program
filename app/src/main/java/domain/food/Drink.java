@@ -7,4 +7,8 @@ public class Drink extends SideFood {
         super(number, name, price);
         this.ml = ml;
     }
+
+    public int getMl() {
+        return ml;
+    }
 }
