@@ -4,7 +4,9 @@ import domain.menu.SideFoodMenu;
 import domain.menu.DrinkMenu;
 import domain.menu.MainFoodMenu;
 import domain.order.OrderPrice;
+import dto.DrinkDTO;
 import dto.MainMenuDTO;
+import dto.SideMenuDTO;
 import org.json.simple.parser.ParseException;
 import utilities.InputNumberValidator;
 import utilities.Parser;
@@ -37,12 +39,11 @@ public class OrderController {
     }
 
     private void firstOrder() {
-        int selectedMainFoodNumber = readMainMenu();
-        int inputQuantityOfMainFood = readQuantityOfMainFood();
+        int priceOfMainFood = readMainMenu();
+        int priceOfSideFood = readSideMenu();
 
-        int priceOfMainFood = mainFoodMenu.getTotalPrice(selectedMainFoodNumber,inputQuantityOfMainFood);
-
-
+        System.out.println(priceOfMainFood);
+        System.out.println(priceOfSideFood);
     }
 
     private int readMainMenu() {
@@ -53,7 +54,8 @@ public class OrderController {
                 String selectedNumber = inputView.readStringNumber();
                 int selectedNumberInt = Parser.parseNumberToInt(selectedNumber);
                 mainFoodMenu.validateInputNumber(selectedNumberInt);
-                return selectedNumberInt;
+                int inputQuantityOfSideFood = readQuantityOfMainFood();
+                return mainFoodMenu.getTotalPrice(selectedNumberInt,inputQuantityOfSideFood);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -67,6 +69,43 @@ public class OrderController {
                 String inputNumber = inputView.readStringNumber();
                 int inputNumberInt = Parser.parseNumberToInt(inputNumber);
                 InputNumberValidator.validateQuantityOfMainFood(inputNumberInt);
+                return inputNumberInt;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private int readSideMenu() {
+        List<SideMenuDTO> sideMenu = SideMenuDTO.getList(sideFoodMenu.getSideFoods());
+        List<DrinkDTO> drinksMenu = DrinkDTO.getList(drinkMenu.getDrinks());
+        outputView.printSideMenu(sideMenu, drinksMenu);
+        while (true) {
+            try {
+                String inputFormula = inputView.readStringNumber();
+                int typeOfSideMenu = InputNumberValidator.validateStartOfFormula(inputFormula);
+                int selectedNumberInt = Parser.parseNumberInFormulaToInt(inputFormula);
+                if (typeOfSideMenu == 1) {
+                    sideFoodMenu.validateInputNumber(selectedNumberInt);
+                    int inputQuantityOfSideFood = readQuantityOfSideFood();
+                    return sideFoodMenu.getTotalPrice(selectedNumberInt,inputQuantityOfSideFood);
+                }
+                drinkMenu.validateInputNumber(selectedNumberInt);
+                int inputQuantityOfSideFood = readQuantityOfSideFood();
+                return drinkMenu.getTotalPrice(selectedNumberInt,inputQuantityOfSideFood);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private int readQuantityOfSideFood() {
+        outputView.printQuantityMessageOfSideFood();
+        while (true) {
+            try {
+                String inputNumber = inputView.readStringNumber();
+                int inputNumberInt = Parser.parseNumberToInt(inputNumber);
+                InputNumberValidator.validateQuantityOfSideFood(inputNumberInt);
                 return inputNumberInt;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
