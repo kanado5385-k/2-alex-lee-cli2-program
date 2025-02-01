@@ -6,6 +6,7 @@ import domain.menu.MainFoodMenu;
 import domain.order.OrderPrice;
 import dto.DrinkDTO;
 import dto.MainMenuDTO;
+import dto.OrderPriceDTO;
 import dto.SideMenuDTO;
 import org.json.simple.parser.ParseException;
 import utilities.InputNumberValidator;
@@ -63,7 +64,8 @@ public class OrderController {
             orderPrice.applyDeliveryPay();
         }
 
-
+        OrderPriceDTO orderPriceDTO = new OrderPriceDTO(orderPrice.getTotalPrice());
+        outputView.printTotalPrice(orderPriceDTO);
     }
 
     private int firstOrder() {
