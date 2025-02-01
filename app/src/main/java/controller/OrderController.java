@@ -58,6 +58,10 @@ public class OrderController {
             orderPrice.applyMembershipDiscount();
         }
 
+        String deliverySelect = readDeliverySelect();
+        if (deliverySelect.equals("Y")) {
+            orderPrice.applyDeliveryPay();
+        }
 
 
     }
@@ -150,7 +154,7 @@ public class OrderController {
     }
 
     private String readMembershipDiscount() {
-        outputView.printYesOrNo();
+        outputView.printMemberShipDiscountMessage();
         while (true) {
             try {
                 String inputStr = inputView.readStringAnswer();
@@ -162,4 +166,16 @@ public class OrderController {
         }
     }
 
+    private String readDeliverySelect() {
+        outputView.printDeliveryMessage();
+        while (true) {
+            try {
+                String inputStr = inputView.readStringAnswer();
+                InputNumberValidator.validateYesOrNoAnswer(inputStr);
+                return inputStr;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 }

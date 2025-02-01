@@ -57,7 +57,13 @@ public class OutputView {
                 "No 3: 결제하기 💰");
     }
 
-    public void printYesOrNo() {
-        System.out.println("멤버십 회원이신가요? (Y/N)");
+    public void printMemberShipDiscountMessage() {
+        System.out.println("멤버십 회원이신가요? (Y/N)\n" +
+                "⭐️멤버십이라면 10% 할인 받을 수 있습니다.");
+    }
+
+    public void printDeliveryMessage() {
+        System.out.println("배달로 주문하시겠습니까? (Y/N)\n" +
+                "📢배달팁이 3000원입니다.");
     }
 }
