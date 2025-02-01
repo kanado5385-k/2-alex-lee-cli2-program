@@ -25,4 +25,20 @@ public class DrinkDTO {
         }
         return list;
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getMl() {
+        return ml;
+    }
 }

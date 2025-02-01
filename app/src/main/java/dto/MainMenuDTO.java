@@ -25,4 +25,20 @@ public class MainMenuDTO {
         }
         return list;
     }
+
+    public int getGram() {
+        return gram;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }
