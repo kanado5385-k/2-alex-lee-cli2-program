@@ -46,4 +46,14 @@ public class InputNumberValidator {
         }
         throw new IllegalArgumentException("[ERROR]: 입력된 형식이 올바르지 않습니다. 다시 시도해주세요.");
     }
+
+    public static void validateAdditionalPurchaseNumber(int inputNum) {
+        if (inputNum <= 0) {
+            throw new IllegalArgumentException("[ERROR]: 자연수를 입력해주셔야합니다. 다시 시도해주세요.");
+        }
+
+        if (inputNum > 3) {
+            throw new IllegalArgumentException("[ERROR]: 1,2,3 숫자 중에서 입력해주세요.");
+        }
+    }
 }

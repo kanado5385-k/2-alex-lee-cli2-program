@@ -35,15 +35,34 @@ public class OrderController {
 
     public void startOrder() {
         outputView.printWelcomeMessage();
-        firstOrder();
+        int priceOfFirstOrder = firstOrder();
+
+        int priceOfAdditionalOrder = 0;
+        while (true) {
+            int additionalPurchase = readAdditionalPurchase();
+            if (additionalPurchase == 1) {
+                int priceOfMainFood = readMainMenu();
+                priceOfAdditionalOrder += priceOfMainFood;
+            }
+            if (additionalPurchase == 2) {
+                int priceOfSideFood = readSideMenu();
+                priceOfAdditionalOrder += priceOfSideFood;
+            }
+            if (additionalPurchase == 3) {
+                break;
+            }
+        }
+        int totalPrice = priceOfFirstOrder + priceOfAdditionalOrder;
+        System.out.println("Total price: " + totalPrice);
+
+
+
     }
 
-    private void firstOrder() {
+    private int firstOrder() {
         int priceOfMainFood = readMainMenu();
         int priceOfSideFood = readSideMenu();
-
-        System.out.println(priceOfMainFood);
-        System.out.println(priceOfSideFood);
+        return priceOfMainFood + priceOfSideFood;
     }
 
     private int readMainMenu() {
@@ -106,6 +125,20 @@ public class OrderController {
                 String inputNumber = inputView.readStringNumber();
                 int inputNumberInt = Parser.parseNumberToInt(inputNumber);
                 InputNumberValidator.validateQuantityOfSideFood(inputNumberInt);
+                return inputNumberInt;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private int readAdditionalPurchase() {
+        outputView.printAdditionalPurchaseMessage();
+        while (true) {
+            try {
+                String inputNumber = inputView.readStringNumber();
+                int inputNumberInt = Parser.parseNumberToInt(inputNumber);
+                InputNumberValidator.validateAdditionalPurchaseNumber(inputNumberInt);
                 return inputNumberInt;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());

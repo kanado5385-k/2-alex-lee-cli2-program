@@ -49,4 +49,11 @@ public class OutputView {
     public void printQuantityMessageOfSideFood() {
         System.out.println("선택하신 사이드 메뉴의 구매 수량을 입력해주세요.");
     }
+
+    public void printAdditionalPurchaseMessage() {
+        System.out.println("추가 구매하실건가요? 결제하실건가요?\n\n" +
+                "No 1: 메인 메뉴 추가 구매 🍖\n" +
+                "No 2: 사이드 메뉴 추가 구매 🍤\n" +
+                "No 3: 결제하기 💰");
+    }
 }
