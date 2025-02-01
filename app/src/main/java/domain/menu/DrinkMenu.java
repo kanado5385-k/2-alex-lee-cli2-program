@@ -2,7 +2,6 @@ package domain.menu;
 
 import domain.food.Drink;
 import domain.food.Food;
-import domain.food.MainFood;
 import domain.menu.interfaces.MenuInterface;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -49,7 +48,7 @@ public class DrinkMenu implements MenuInterface {
 
     @Override
     public void validateInputNumber(int inputNum) {
-        InputNumberValidator.validateInputNumber(inputNum, drinks.size());
+        InputNumberValidator.validateNumberOfFood(inputNum, drinks.size());
     }
 
     @Override

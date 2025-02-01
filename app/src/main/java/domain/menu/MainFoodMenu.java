@@ -51,7 +51,7 @@ public class MainFoodMenu implements MenuInterface {
 
     @Override
     public void validateInputNumber(int inputNum) {
-        InputNumberValidator.validateInputNumber(inputNum, mainFoods.size());
+        InputNumberValidator.validateNumberOfFood(inputNum, mainFoods.size());
     }
 
     @Override

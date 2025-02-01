@@ -3,7 +3,6 @@ package domain.menu;
 
 
 import domain.food.Food;
-import domain.food.MainFood;
 import domain.food.SideFood;
 import domain.menu.interfaces.MenuInterface;
 import org.json.simple.JSONArray;
@@ -50,7 +49,7 @@ public class SideFoodMenu implements MenuInterface {
 
     @Override
     public void validateInputNumber(int inputNum) {
-        InputNumberValidator.validateInputNumber(inputNum, sideFoods.size());
+        InputNumberValidator.validateNumberOfFood(inputNum, sideFoods.size());
     }
 
     @Override
