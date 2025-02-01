@@ -56,4 +56,8 @@ public class OutputView {
                 "No 2: 사이드 메뉴 추가 구매 🍤\n" +
                 "No 3: 결제하기 💰");
     }
+
+    public void printYesOrNo() {
+        System.out.println("멤버십 회원이신가요? (Y/N)");
+    }
 }

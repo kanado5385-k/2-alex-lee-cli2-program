@@ -36,7 +36,6 @@ public class OrderController {
     public void startOrder() {
         outputView.printWelcomeMessage();
         int priceOfFirstOrder = firstOrder();
-
         int priceOfAdditionalOrder = 0;
         while (true) {
             int additionalPurchase = readAdditionalPurchase();
@@ -52,8 +51,12 @@ public class OrderController {
                 break;
             }
         }
-        int totalPrice = priceOfFirstOrder + priceOfAdditionalOrder;
-        System.out.println("Total price: " + totalPrice);
+        orderPrice.addOrderPrice(priceOfFirstOrder + priceOfAdditionalOrder);
+
+        String membershipDiscount = readMembershipDiscount();
+        if (membershipDiscount.equals("Y")) {
+            orderPrice.applyMembershipDiscount();
+        }
 
 
 
@@ -70,7 +73,7 @@ public class OrderController {
         outputView.printMainMenu(mainMenu);
         while (true) {
             try {
-                String selectedNumber = inputView.readStringNumber();
+                String selectedNumber = inputView.readStringAnswer();
                 int selectedNumberInt = Parser.parseNumberToInt(selectedNumber);
                 mainFoodMenu.validateInputNumber(selectedNumberInt);
                 int inputQuantityOfSideFood = readQuantityOfMainFood();
@@ -85,7 +88,7 @@ public class OrderController {
         outputView.printQuantityMessageOfMainFood();
         while (true) {
             try {
-                String inputNumber = inputView.readStringNumber();
+                String inputNumber = inputView.readStringAnswer();
                 int inputNumberInt = Parser.parseNumberToInt(inputNumber);
                 InputNumberValidator.validateQuantityOfMainFood(inputNumberInt);
                 return inputNumberInt;
@@ -101,7 +104,7 @@ public class OrderController {
         outputView.printSideMenu(sideMenu, drinksMenu);
         while (true) {
             try {
-                String inputFormula = inputView.readStringNumber();
+                String inputFormula = inputView.readStringAnswer();
                 int typeOfSideMenu = InputNumberValidator.validateStartOfFormula(inputFormula);
                 int selectedNumberInt = Parser.parseNumberInFormulaToInt(inputFormula);
                 if (typeOfSideMenu == 1) {
@@ -122,7 +125,7 @@ public class OrderController {
         outputView.printQuantityMessageOfSideFood();
         while (true) {
             try {
-                String inputNumber = inputView.readStringNumber();
+                String inputNumber = inputView.readStringAnswer();
                 int inputNumberInt = Parser.parseNumberToInt(inputNumber);
                 InputNumberValidator.validateQuantityOfSideFood(inputNumberInt);
                 return inputNumberInt;
@@ -136,10 +139,23 @@ public class OrderController {
         outputView.printAdditionalPurchaseMessage();
         while (true) {
             try {
-                String inputNumber = inputView.readStringNumber();
+                String inputNumber = inputView.readStringAnswer();
                 int inputNumberInt = Parser.parseNumberToInt(inputNumber);
                 InputNumberValidator.validateAdditionalPurchaseNumber(inputNumberInt);
                 return inputNumberInt;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private String readMembershipDiscount() {
+        outputView.printYesOrNo();
+        while (true) {
+            try {
+                String inputStr = inputView.readStringAnswer();
+                InputNumberValidator.validateYesOrNoAnswer(inputStr);
+                return inputStr;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

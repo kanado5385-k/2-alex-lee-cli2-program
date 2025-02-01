@@ -56,4 +56,13 @@ public class InputNumberValidator {
             throw new IllegalArgumentException("[ERROR]: 1,2,3 숫자 중에서 입력해주세요.");
         }
     }
+
+    public static void validateYesOrNoAnswer(String answer) {
+        if (!answer.equals("Y") &&
+                !answer.equals("N")) {
+            throw new IllegalArgumentException("[ERROR]: 'Y' or 'N' 으로 입력해주세요.");
+        }
+    }
+
+
 }

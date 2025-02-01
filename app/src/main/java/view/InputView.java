@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class InputView {
     Scanner scanner = new Scanner(System.in);
 
-    public String readStringNumber() {
+    public String readStringAnswer() {
         return scanner.nextLine();
     }
 
