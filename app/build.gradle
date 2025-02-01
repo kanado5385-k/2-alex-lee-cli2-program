@@ -1,0 +1,28 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    implementation 'com.google.guava:guava:32.1.2-jre'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass = 'App'
+}

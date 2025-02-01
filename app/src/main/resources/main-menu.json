@@ -10,5 +10,29 @@
     "name": "목살",
     "price": 12000,
     "gram": 180
+  },
+  {
+    "number": 3,
+    "name": "등심",
+    "price": 15000,
+    "gram": 200
+  },
+  {
+    "number": 4,
+    "name": "안심",
+    "price": 18000,
+    "gram": 180
+  },
+  {
+    "number": 5,
+    "name": "갈비",
+    "price": 20000,
+    "gram": 250
+  },
+  {
+    "number": 6,
+    "name": "차돌박이",
+    "price": 14000,
+    "gram": 130
   }
 ]

@@ -39,6 +39,9 @@ public class OutputView {
             System.out.printf("No: " + "1-%d. " + "%s" + " / %d원%n",
                     sideMenuDTO.getNumber(), sideMenuDTO.getName(), sideMenuDTO.getPrice());
         }
+
+        System.out.println();
+
         for (DrinkDTO drinkDTO : drink) {
             System.out.printf("No: " + "2-%d. " + "%s %d" + "ml" + " / %d원%n",
                     drinkDTO.getNumber(), drinkDTO.getName(), drinkDTO.getMl(), drinkDTO.getPrice());
@@ -69,6 +72,6 @@ public class OutputView {
     }
 
     public void printTotalPrice(OrderPriceDTO orderPriceDTO) {
-        System.out.println(System.lineSeparator() + "총 결재금액 :  " + orderPriceDTO.getTotalPrice() + "원");
+        System.out.println(System.lineSeparator() + "💵총 결재금액 :  " + orderPriceDTO.getTotalPrice() + "원 💵");
     }
 }
