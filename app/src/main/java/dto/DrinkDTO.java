@@ -11,7 +11,7 @@ public class DrinkDTO {
     private final int price;
     private final int ml;
 
-    public DrinkDTO(Drink drink) {
+    private DrinkDTO(Drink drink) {
         this.number = drink.getNumber();
         this.name = drink.getName();
         this.price = drink.getPrice();

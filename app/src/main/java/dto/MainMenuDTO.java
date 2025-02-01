@@ -11,7 +11,7 @@ public class MainMenuDTO {
     private final int price;
     private final int gram;
 
-    public MainMenuDTO(MainFood mainFood) {
+    private MainMenuDTO(MainFood mainFood) {
         this.number = mainFood.getNumber();
         this.name = mainFood.getName();
         this.price = mainFood.getPrice();

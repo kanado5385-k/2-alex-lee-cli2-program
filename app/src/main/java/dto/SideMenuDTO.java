@@ -10,7 +10,7 @@ public class SideMenuDTO {
     private final String name;
     private final int price;
 
-    public SideMenuDTO(SideFood sideFood) {
+    private SideMenuDTO(SideFood sideFood) {
         this.number = sideFood.getNumber();
         this.name = sideFood.getName();
         this.price = sideFood.getPrice();
