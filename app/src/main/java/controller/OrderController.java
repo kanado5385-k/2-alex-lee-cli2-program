@@ -69,9 +69,7 @@ public class OrderController {
 
         OrderPriceDTO orderPriceDTO = new OrderPriceDTO(orderPrice.getTotalPrice());
         outputView.printTotalPrice(orderPriceDTO);
-        mainFoodMenu.saveMenuFile();
-        sideFoodMenu.saveMenuFile();
-        drinkMenu.saveMenuFile();
+        updateMenuFile();
     }
 
     private int firstOrder() {
@@ -214,5 +212,11 @@ public class OrderController {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private synchronized void  updateMenuFile() throws IOException {
+        mainFoodMenu.saveMenuFile();
+        sideFoodMenu.saveMenuFile();
+        drinkMenu.saveMenuFile();
     }
 }
