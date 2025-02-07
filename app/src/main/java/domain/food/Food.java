@@ -36,4 +36,12 @@ public class Food {
     public int getQuantity() {
         return quantity;
     }
+
+    public boolean isSufficientQuantity(int inputQuantity) {
+        return quantity >= inputQuantity;
+    }
+
+    public void decreaseQuantity(int inputQuantity) {
+        quantity -= inputQuantity;
+    }
 }
