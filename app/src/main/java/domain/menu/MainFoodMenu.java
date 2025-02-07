@@ -84,6 +84,7 @@ public class MainFoodMenu implements MenuInterface {
         return  mainFood.getTotalPrice(inputQuantity);
     }
 
+    @Override
     public boolean isSufficientQuantity (int inputNumber, int inputQuantity) {
         Food mainFood = null;
         for (Food food : mainFoods) {
@@ -94,6 +95,7 @@ public class MainFoodMenu implements MenuInterface {
         return  mainFood.isSufficientQuantity(inputQuantity);
     }
 
+    @Override
     public void decreaseQuantity (int inputNumber, int inputQuantity) {
         Food mainFood = null;
         for (Food food : mainFoods) {

@@ -11,4 +11,10 @@ public interface MenuInterface {
     public void validateInputNumber(int inputNum);
 
     public int getTotalPrice(int inputNumber, int inputQuantity);
+
+    public boolean isSufficientQuantity (int inputNumber, int inputQuantity);
+
+    public void decreaseQuantity (int inputNumber, int inputQuantity);
+
+
 }

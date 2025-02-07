@@ -70,6 +70,8 @@ public class OrderController {
         OrderPriceDTO orderPriceDTO = new OrderPriceDTO(orderPrice.getTotalPrice());
         outputView.printTotalPrice(orderPriceDTO);
         mainFoodMenu.saveMenuFile();
+        sideFoodMenu.saveMenuFile();
+        drinkMenu.saveMenuFile();
     }
 
     private int firstOrder() {
@@ -124,11 +126,11 @@ public class OrderController {
                 int selectedNumberInt = Parser.parseNumberInFormulaToInt(inputFormula);
                 if (typeOfSideMenu == 1) {
                     sideFoodMenu.validateInputNumber(selectedNumberInt);
-                    int inputQuantityOfSideFood = readQuantityOfSideFood();
+                    int inputQuantityOfSideFood = readQuantityOfSideFood(selectedNumberInt);
                     return sideFoodMenu.getTotalPrice(selectedNumberInt,inputQuantityOfSideFood);
                 }
                 drinkMenu.validateInputNumber(selectedNumberInt);
-                int inputQuantityOfSideFood = readQuantityOfSideFood();
+                int inputQuantityOfSideFood = readQuantityOfDrink(selectedNumberInt);
                 return drinkMenu.getTotalPrice(selectedNumberInt,inputQuantityOfSideFood);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -136,13 +138,37 @@ public class OrderController {
         }
     }
 
-    private int readQuantityOfSideFood() {
+    private int readQuantityOfSideFood(int selectedFoodNumber) {
         outputView.printQuantityMessageOfSideFood();
         while (true) {
             try {
                 String inputNumber = inputView.readStringAnswer();
                 int inputNumberInt = Parser.parseNumberToInt(inputNumber);
                 InputNumberValidator.validateQuantityOfSideFood(inputNumberInt);
+                boolean isCanBuy = sideFoodMenu.isSufficientQuantity(selectedFoodNumber, inputNumberInt);
+                if (!isCanBuy) {
+                    throw new NumberFormatException("[ERROR]: 선택하신 수량이 현재 남은 수량보다 많습니다. 다시 입력해주세요.");
+                }
+                sideFoodMenu.decreaseQuantity(selectedFoodNumber, inputNumberInt);
+                return inputNumberInt;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private int readQuantityOfDrink(int selectedFoodNumber) {
+        outputView.printQuantityMessageOfSideFood();
+        while (true) {
+            try {
+                String inputNumber = inputView.readStringAnswer();
+                int inputNumberInt = Parser.parseNumberToInt(inputNumber);
+                InputNumberValidator.validateQuantityOfSideFood(inputNumberInt);
+                boolean isCanBuy = drinkMenu.isSufficientQuantity(selectedFoodNumber, inputNumberInt);
+                if (!isCanBuy) {
+                    throw new NumberFormatException("[ERROR]: 선택하신 수량이 현재 남은 수량보다 많습니다. 다시 입력해주세요.");
+                }
+                drinkMenu.decreaseQuantity(selectedFoodNumber, inputNumberInt);
                 return inputNumberInt;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());

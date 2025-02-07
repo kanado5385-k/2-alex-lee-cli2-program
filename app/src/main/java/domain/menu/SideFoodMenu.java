@@ -3,6 +3,7 @@ package domain.menu;
 
 
 import domain.food.Food;
+import domain.food.MainFood;
 import domain.food.SideFood;
 import domain.menu.interfaces.MenuInterface;
 import org.json.simple.JSONArray;
@@ -11,9 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import utilities.InputNumberValidator;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,14 +23,12 @@ public class SideFoodMenu implements MenuInterface {
         this.sideFoods = readMenuFile();
     }
 
-    public List<SideFood> readMenuFile () throws IOException, ParseException {
+    public List<SideFood> readMenuFile() throws IOException, ParseException {
         List<SideFood> sideFoods = new ArrayList<>();
         JSONParser parser = new JSONParser();
 
-        // JSON 파일을 읽기
-        Reader reader = new InputStreamReader(
-                getClass().getClassLoader().getResourceAsStream("side-menu.json")
-        );
+        // "data/main-menu.json" 경로의 파일을 읽기
+        Reader reader = new FileReader("data/side-menu.json");
         JSONArray jsonArray = (JSONArray) parser.parse(reader);
 
         // JSON 배열을 순회하면서 MainFood 객체 생성
@@ -45,7 +42,28 @@ public class SideFoodMenu implements MenuInterface {
             SideFood sideFood = new SideFood(number, name, price, quantity);
             sideFoods.add(sideFood);
         }
+        reader.close();
         return sideFoods;
+    }
+
+    public void saveMenuFile() throws IOException {
+        BufferedWriter writer = new BufferedWriter(
+                new FileWriter("data/side-menu.json")
+        );
+        writer.write("[");
+        for (int i = 0; i < sideFoods.size(); i++) {
+            SideFood item = sideFoods.get(i);
+            writer.write(String.format(
+                    "{\"number\": %d, \"name\": \"%s\", \"price\": %d, \"quantity\": %d}",
+                    item.getNumber(), item.getName(), item.getPrice(), item.getQuantity()
+            ));
+            if (i < sideFoods.size() - 1) {
+                writer.write(",\n");
+            }
+        }
+        writer.write("]");
+        writer.flush();
+        writer.close();
     }
 
     @Override
@@ -55,13 +73,35 @@ public class SideFoodMenu implements MenuInterface {
 
     @Override
     public int getTotalPrice(int inputNumber, int inputQuantity) {
-        Food mainFood = null;
+        Food sideFood = null;
         for (Food food : sideFoods) {
             if (food.isSameNumber(inputNumber)) {
-                mainFood = food;
+                sideFood = food;
             }
         }
-        return  mainFood.getTotalPrice(inputQuantity);
+        return  sideFood.getTotalPrice(inputQuantity);
+    }
+
+    @Override
+    public boolean isSufficientQuantity (int inputNumber, int inputQuantity) {
+        Food sideFood = null;
+        for (Food food : sideFoods) {
+            if (food.isSameNumber(inputNumber)) {
+                sideFood = food;
+            }
+        }
+        return  sideFood.isSufficientQuantity(inputQuantity);
+    }
+
+    @Override
+    public void decreaseQuantity (int inputNumber, int inputQuantity) {
+        Food sideFood = null;
+        for (Food food : sideFoods) {
+            if (food.isSameNumber(inputNumber)) {
+                sideFood = food;
+            }
+        }
+        sideFood.decreaseQuantity(inputQuantity);
     }
 
     public List<SideFood> getSideFoods() {
