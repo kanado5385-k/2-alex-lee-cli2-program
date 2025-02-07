@@ -24,6 +24,9 @@ public class OrderController {
     private final OrderPrice orderPrice;
     private final InputView inputView;
     private final OutputView outputView;
+    private List<MainMenuDTO> mainMenu;
+    private List<SideMenuDTO> sideMenu;
+    private List<DrinkDTO> drinksMenu;
 
     public OrderController() throws IOException, ParseException {
         this.drinkMenu = new DrinkMenu();
@@ -34,7 +37,7 @@ public class OrderController {
         this.outputView = new OutputView();
     }
 
-    public void startOrder() {
+    public void startOrder() throws IOException {
         outputView.printWelcomeMessage();
         int priceOfFirstOrder = firstOrder();
         int priceOfAdditionalOrder = 0;
@@ -66,6 +69,7 @@ public class OrderController {
 
         OrderPriceDTO orderPriceDTO = new OrderPriceDTO(orderPrice.getTotalPrice());
         outputView.printTotalPrice(orderPriceDTO);
+        mainFoodMenu.saveMenuFile();
     }
 
     private int firstOrder() {
@@ -75,14 +79,14 @@ public class OrderController {
     }
 
     private int readMainMenu() {
-        List<MainMenuDTO> mainMenu = MainMenuDTO.getList(mainFoodMenu.getMainFoods());
+        mainMenu = MainMenuDTO.getList(mainFoodMenu.getMainFoods());
         outputView.printMainMenu(mainMenu);
         while (true) {
             try {
                 String selectedNumber = inputView.readStringAnswer();
                 int selectedNumberInt = Parser.parseNumberToInt(selectedNumber);
                 mainFoodMenu.validateInputNumber(selectedNumberInt);
-                int inputQuantityOfSideFood = readQuantityOfMainFood();
+                int inputQuantityOfSideFood = readQuantityOfMainFood(selectedNumberInt);
                 return mainFoodMenu.getTotalPrice(selectedNumberInt,inputQuantityOfSideFood);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -90,13 +94,18 @@ public class OrderController {
         }
     }
 
-    private int readQuantityOfMainFood() {
+    private int readQuantityOfMainFood(int selectedFoodNumber) {
         outputView.printQuantityMessageOfMainFood();
         while (true) {
             try {
                 String inputNumber = inputView.readStringAnswer();
                 int inputNumberInt = Parser.parseNumberToInt(inputNumber);
                 InputNumberValidator.validateQuantityOfMainFood(inputNumberInt);
+                boolean isCanBuy = mainFoodMenu.isSufficientQuantity(selectedFoodNumber, inputNumberInt);
+                if (!isCanBuy) {
+                    throw new NumberFormatException("[ERROR]: 선택하신 수량이 현재 남은 수량보다 많습니다. 다시 입력해주세요.");
+                }
+                mainFoodMenu.decreaseQuantity(selectedFoodNumber, inputNumberInt);
                 return inputNumberInt;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -105,8 +114,8 @@ public class OrderController {
     }
 
     private int readSideMenu() {
-        List<SideMenuDTO> sideMenu = SideMenuDTO.getList(sideFoodMenu.getSideFoods());
-        List<DrinkDTO> drinksMenu = DrinkDTO.getList(drinkMenu.getDrinks());
+        sideMenu = SideMenuDTO.getList(sideFoodMenu.getSideFoods());
+        drinksMenu = DrinkDTO.getList(drinkMenu.getDrinks());
         outputView.printSideMenu(sideMenu, drinksMenu);
         while (true) {
             try {
