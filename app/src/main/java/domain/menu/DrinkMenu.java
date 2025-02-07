@@ -39,8 +39,9 @@ public class DrinkMenu implements MenuInterface {
             String name = (String) jsonObject.get("name");
             int price = ((Long) jsonObject.get("price")).intValue();
             int ml = ((Long) jsonObject.get("ml")).intValue();
+            int quantity = ((Long) jsonObject.get("quantity")).intValue();
 
-            Drink drink = new Drink(number, name, price, ml);
+            Drink drink = new Drink(number, name, price, ml, quantity);
             drinks.add(drink);
         }
         return drinks;

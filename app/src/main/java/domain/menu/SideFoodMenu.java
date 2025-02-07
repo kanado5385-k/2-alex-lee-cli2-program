@@ -40,8 +40,9 @@ public class SideFoodMenu implements MenuInterface {
             int number = ((Long) jsonObject.get("number")).intValue();
             String name = (String) jsonObject.get("name");
             int price = ((Long) jsonObject.get("price")).intValue();
+            int quantity = ((Long) jsonObject.get("quantity")).intValue();
 
-            SideFood sideFood = new SideFood(number, name, price);
+            SideFood sideFood = new SideFood(number, name, price, quantity);
             sideFoods.add(sideFood);
         }
         return sideFoods;

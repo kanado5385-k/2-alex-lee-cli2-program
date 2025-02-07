@@ -10,12 +10,14 @@ public class MainMenuDTO {
     private final String name;
     private final int price;
     private final int gram;
+    private final int quantity;
 
     private MainMenuDTO(MainFood mainFood) {
         this.number = mainFood.getNumber();
         this.name = mainFood.getName();
         this.price = mainFood.getPrice();
         this.gram = mainFood.getGram();
+        this.quantity = mainFood.getQuantity();
     }
 
     public static List<MainMenuDTO> getList(List<MainFood> mainFoodList) {
@@ -40,5 +42,9 @@ public class MainMenuDTO {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }

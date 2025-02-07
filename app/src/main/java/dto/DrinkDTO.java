@@ -10,12 +10,14 @@ public class DrinkDTO {
     private final String name;
     private final int price;
     private final int ml;
+    private final int quantity;
 
     private DrinkDTO(Drink drink) {
         this.number = drink.getNumber();
         this.name = drink.getName();
         this.price = drink.getPrice();
         this.ml = drink.getMl();
+        this.quantity = drink.getQuantity();
     }
 
     public static List<DrinkDTO> getList(List<Drink> drinkList) {
@@ -40,5 +42,9 @@ public class DrinkDTO {
 
     public int getMl() {
         return ml;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }
