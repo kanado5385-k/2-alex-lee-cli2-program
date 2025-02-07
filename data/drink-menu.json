@@ -1,0 +1,4 @@
+[{"number": 1, "name": "콜라", "price": 2000, "ml": 500, "quantity": 0},
+{"number": 2, "name": "맥주", "price": 5000, "ml": 500, "quantity": 12},
+{"number": 3, "name": "사이다", "price": 2000, "ml": 500, "quantity": 29},
+{"number": 4, "name": "오렌지 주스", "price": 3500, "ml": 450, "quantity": 40}]
