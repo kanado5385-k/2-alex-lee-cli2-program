@@ -12,7 +12,7 @@ public class OutputView {
 
     public void printWelcomeMessage() {
         System.out.println("🛵안녕하세요, 고기의 민족입니다.🛵\n" +
-                "  주문을 도와드리겠습니다.\n" +
+                "    주문을 도와드리겠습니다.\n" +
                 DELIMITER);
     }
 

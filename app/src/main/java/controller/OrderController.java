@@ -24,9 +24,6 @@ public class OrderController {
     private final OrderPrice orderPrice;
     private final InputView inputView;
     private final OutputView outputView;
-    private List<MainMenuDTO> mainMenu;
-    private List<SideMenuDTO> sideMenu;
-    private List<DrinkDTO> drinksMenu;
 
     public OrderController() throws IOException, ParseException {
         this.drinkMenu = new DrinkMenu();
@@ -79,7 +76,7 @@ public class OrderController {
     }
 
     private int readMainMenu() {
-        mainMenu = MainMenuDTO.getList(mainFoodMenu.getMainFoods());
+        List<MainMenuDTO> mainMenu = MainMenuDTO.getList(mainFoodMenu.getMainFoods());
         outputView.printMainMenu(mainMenu);
         while (true) {
             try {
@@ -114,8 +111,8 @@ public class OrderController {
     }
 
     private int readSideMenu() {
-        sideMenu = SideMenuDTO.getList(sideFoodMenu.getSideFoods());
-        drinksMenu = DrinkDTO.getList(drinkMenu.getDrinks());
+        List<SideMenuDTO> sideMenu = SideMenuDTO.getList(sideFoodMenu.getSideFoods());
+        List<DrinkDTO> drinksMenu = DrinkDTO.getList(drinkMenu.getDrinks());
         outputView.printSideMenu(sideMenu, drinksMenu);
         while (true) {
             try {
